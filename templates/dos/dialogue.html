@@ -1,0 +1,403 @@
+{% load staticfiles %}
+
+<title>DOS英语俱乐部</title>
+<link rel="bookmark"  type="image/x-icon"  href="{% static 'images/dos.ico' %}"/>
+<link rel="icon" href="{% static 'images/dos.ico' %}" type="image/x-icon"/>
+<link rel="shortcut icon" href="{% static 'images/dos.ico' %}">
+
+<link href="{% static 'css/base.css' %}?ver=1" rel="stylesheet">
+
+<!—引入 JEUI 的CSS和js 文件-->
+<link href="{% static 'jeui/css/jeui.css' %}" rel="stylesheet">
+<script src="{% static 'jeui/js/modules/jeui.js' %}" charset="utf-8"></script>
+
+<style>
+	body{
+		background: white;
+		font-family: "Microsoft YaHei";
+	}
+
+	ul {
+	    list-style-type: none;
+	    margin: 0;
+	    padding: 0;
+	    overflow: hidden;
+	    background-color: #333;
+	}
+
+	li {
+	    float: left;
+	}
+
+
+	li a, .dropbtn {
+	    display: inline-block;
+	    color: white;
+	    text-align: center;
+	    padding: 14px 16px;
+	    text-decoration: none;
+	}
+
+	.dropdown {
+	    display: inline-block;
+	}
+
+	.dropdown-content {
+	    display: none;
+	    position: absolute;
+	    background-color: #f9f9f9;
+	    min-width: 90px;
+	    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	    text-align: left;
+	}
+
+	.dropdown-content a {
+	    color: white;
+	    background: #333;
+	    padding: 12px 16px;
+	    text-decoration: none;
+	    display: block;
+	}
+
+	.dropdown-content a:hover {
+		color: black;
+		background-color: #f1f1f1
+	}
+
+	.dropdown:hover .dropdown-content{
+	    display: block;
+	    position: fixed;
+	}
+
+    a:visited{
+       	color: white;
+    }
+
+    .right{
+        float: right;
+        text-align:center;height:33px;width:33px; margin: 0 10px 0 20px; padding-top: 3px
+    }
+
+    .left{
+        float: left;
+    }
+
+    .Chat_bubble_right{
+        width:580px;
+        height:auto;
+        border:2px solid #B23AEE;
+        position:relative;
+        background-color:#FFF;
+        line-height: 20px;
+        padding: 10px;
+        font-size: 12px;
+        border-radius: 8px;
+        -moz-border-radius: 8px;
+        -webkit-border-radius: 8px;
+    }
+
+    .Chat_bubble_right:before, .Chat_bubble_right:after{
+        content:"";
+        position:absolute;
+        right: -12px;
+        top: 5px;
+        border-right: 12px solid ;
+        border-top: 12px solid;
+        border-color:  #B23AEE  transparent transparent transparent;
+        font-size:0;
+        line-height:0;
+    }
+
+    .Chat_bubble_right:after {
+        top: 7px;
+        right: -7px;
+        border-color: white transparent transparent transparent;
+    }
+
+    .dialogue{
+        float: left;width:730px;border-left: solid 1px grey;border-right: solid 1px grey
+    }
+
+    a:link{
+    	color: white;
+    }
+</style>
+
+{#顶部导航#}
+<div style="text-align: left;position: fixed;top: 0px;width: 100%;z-index: 99;">
+<ul style=" height:60px;font-size: 20px">
+
+  <div class="dropdown">
+	    <a id="edit" href="#" class="dropbtn">DOS英语俱乐部</a>
+  </div>
+
+  <div class="dropdown">
+	    <a href="#" class="dropbtn">第1课-用餐</a>
+	    <div class="dropdown-content">
+		    <a href="{% url 'dialogue' %}?courseid=1&partid=1">对话1-聚餐邀约</a>
+		    <a href="{% url 'dialogue' %}?courseid=1&partid=2">对话2-预定餐厅</a>
+		    <a href="{% url 'dialogue' %}?courseid=1&partid=3">对话3-点餐</a>
+	    </div>
+  </div>
+
+  <div class="dropdown">
+	    <a href="#" class="dropbtn">第2课-购物</a>
+	    <div class="dropdown-content">
+		    <a href="{% url 'dialogue' %}?courseid=2&partid=1">对话1-购物邀约</a>
+		    <a href="{% url 'dialogue' %}?courseid=2&partid=2">对话2-购物主张</a>
+		    <a href="{% url 'dialogue' %}?courseid=2&partid=3">对话3-购物方式</a>
+	    </div>
+  </div>
+
+    <div class="dropdown">
+	    <a href="#" class="dropbtn">第3课-交通</a>
+	    <div class="dropdown-content">
+		    <a href="{% url 'dialogue' %}?courseid=3&partid=1">对话1-问路</a>
+		    <a href="{% url 'dialogue' %}?courseid=3&partid=2">对话2-登机</a>
+		    <a href="{% url 'dialogue' %}?courseid=3&partid=3">对话3-飞机上</a>
+	    </div>
+  </div>
+
+    <div class="dropdown">
+	    <a href="#" class="dropbtn">第4课-酒店</a>
+	    <div class="dropdown-content">
+		    <a href="{% url 'dialogue' %}?courseid=4&partid=1">对话1-预订酒店</a>
+		    <a href="{% url 'dialogue' %}?courseid=4&partid=2">对话2-办理入住</a>
+		    <a href="{% url 'dialogue' %}?courseid=4&partid=3">对话3-客房服务</a>
+	    </div>
+  	</div>
+
+    <div class="dropdown">
+	    <a href="#" class="dropbtn">第5课-工作</a>
+	    <div class="dropdown-content">
+		    <a href="{% url 'dialogue' %}?courseid=5&partid=1">对话1-询问工作</a>
+		    <a href="{% url 'dialogue' %}?courseid=5&partid=2">对话2-工作近况</a>
+	    </div>
+  	</div>
+
+    <div class="dropdown">
+	    <a href="#" class="dropbtn">第6课-假期</a>
+	    <div class="dropdown-content">
+		    <a href="{% url 'dialogue' %}?courseid=6&partid=1">对话1-春节</a>
+	    </div>
+  	</div>
+
+    <div class="dropdown">
+	    <a href="#" class="dropbtn">第7课-保持健康</a>
+	    <div class="dropdown-content">
+		    <a href="{% url 'dialogue' %}?courseid=7&partid=1">对话1-保持健康</a>
+	    </div>
+  	</div>
+
+</ul>
+</div>
+
+{# 语音 #}
+<div style="position: fixed;right: 10px;top: 7px;z-index: 100">
+
+</div>
+
+
+{# 单词 #}
+<div style="position: fixed;right: 70px;top: 90px;text-align: left;line-height: 30px">
+    <div class="je-form-item je-f14 switch" style="display: inline-table;margin-bottom: 10px;margin-left: -43px">
+        <label class="je-label je-f14">显示中文</label>
+        <input type="checkbox" id="showChinese" name="checkboxswitch" jename="switch" checked>
+    </div>
+
+{# 视频 #}
+<div style="margin-bottom: 20px">
+<video style="width:120px" controls src="http://ph6p9fxtn.bkt.clouddn.com/{{courseid}}.{{partid}}.mp4"></video>
+</div>
+
+<p style="text-align: left;font-weight: bold">本期单词——共{{ wordnum }}个</p>
+    {% for word in wordlist %}
+       <p style="text-decoration: underline"><a target="_blank" style="color: dimgrey" href="https://fanyi.baidu.com/#en/zh/{{ word.word }}">{{ word.word }}</a></p>
+    {% endfor %}
+
+<div style="margin-top: 30px">
+<form action="{% url 'dialogue' %}?courseid={{ courseid }}&partid={{ partid }}&add=word" method="post">
+    {% csrf_token %}
+    <div class="je-form-item" style="display: inline;">
+        <input required="required" autofocus style="width: 100px" type="text" name="word"  placeholder="请输入单词" class="je-input">
+    </div>
+    <button type="submit" style="height:33px;width: 33px;border-radius: 50%;font-size: 27px;line-height: 30px; cursor: pointer; color: white; background: green;display: inline">+</button>
+</form>
+</div>
+
+</div>
+
+<div style="width:79%;display: flex;justify-content: center;  /*水平居中*/">
+    {# 对话 #}
+
+    <div style="width:730px; margin-left:0px; padding: 80px 10px {% ifequal action 'add' %}230px{% else %}10px{% endifequal%} 10px;">
+        <div>
+        <p style="text-align: center;font-weight: bold">第{{ courseid }}课—对话{{ partid }}——共{{ num }}句</p>
+        </div>
+        <div style="text-align:center;margin: 10px 0px ">
+         <audio controls src="{% static 'video/DOSEnglish/' %}{{courseid}}.{{partid}}.mp3"></audio>
+        </div>
+
+        <div>
+            {% for comment in dialogue %}
+
+            {#靠右#}
+            {% ifequal comment.lr 0 %}
+                <div class="dialogue">
+                    <div class="right" >
+                        <img src='{{ MEDIA_URL }}{{comment.spokesperson.photo }}' width='33px' />
+                    </div>
+
+                    <div class="body" style="float: left;margin: 0 10px 0 65px; width:590px">
+
+                        <p style="text-align:right;line-height: 20px;padding: 5px 0px 5px 5px;color:{{ comment.spokesperson.color}}; font-weight: bold">{{ comment.spokesperson.name }}</p>
+
+                        <div class="Chat_bubble_right" >
+                           <span style="font-size:15px;font-weight: bold;"> {{ comment.content | safe }}</span>
+                          <p class="Chinese" style="line-height: 20px;color:darkslategray;"> {{ comment.translate | safe }}</p>
+                        </div>
+
+                    </div>
+                 </div>
+            {% else %}
+                {#靠左#}
+                <div class="dialogue">
+                    <div class="left" style="text-align:center;height:33px;width:33px; margin: 0 10px; padding-top: 3px">
+                          <img style="border-radius:50%;" alt='' src='{{ MEDIA_URL }}{{comment.spokesperson.photo }}'   width='33px' />
+                    </div>
+
+                    <div class="body" style="float: left;margin: 0 10px; width:590px">
+
+                      <p style="line-height: 20px;color:darkslategray;padding: 5px 0px 5px 5px">
+                          <span style="font-weight: bold;color:{{ comment.spokesperson.color}};  ">{{ comment.spokesperson.name }}</span>
+                      </p>
+
+                      <div class="Chat_bubble_female ">
+                                                       <span style="font-size:15px;font-weight: bold;"> {{ comment.content | safe }}</span>
+                        <p class="Chinese" style="line-height: 20px;color:darkslategray;"> {{ comment.translate | safe }}</p>
+                      </div>
+
+                    </div>
+                 </div>
+
+               {% endifequal %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{#新增对话#}
+<div {% ifnotequal action 'add' %}hidden{% endifnotequal%} id="add" style="position: fixed;bottom: 0px; background-color: white;width: 100%;padding:10px 0px 10px 21%">
+<form action="{% url 'dialogue' %}?add=dialogue" method="post">
+    {% csrf_token %}
+
+<div>
+    <div style="margin-bottom: 0px;display: inline" class="je-form-item je-f14">
+        <label class="je-label je-f14">课程</label>
+        <select name="courseid" class="myselect" id="myselect" >
+            <option value="1" {% ifequal courseid 1 %} selected {% endifequal %}>第1课</option>
+            <option value="2" {% ifequal courseid 2 %} selected {% endifequal %}>第2课</option>
+            <option value="3" {% ifequal courseid 3 %} selected {% endifequal %}>第3课</option>
+            <option value="4" {% ifequal courseid 4 %} selected {% endifequal %}>第4课</option>
+            <option value="5" {% ifequal courseid 5 %} selected {% endifequal %}>第5课</option>
+            <option value="6" {% ifequal courseid 6 %} selected {% endifequal %}>第6课</option>
+            <option value="7" {% ifequal courseid 7 %} selected {% endifequal %}>第7课</option>
+            <option value="8" {% ifequal courseid 8 %} selected {% endifequal %}>第8课</option>
+            <option value="9" {% ifequal courseid 9 %} selected {% endifequal %}>第9课</option>
+            <option value="10" {% ifequal courseid 10 %} selected {% endifequal %}>第10课</option>
+        </select>
+        <select name="partid" class="myselect">
+            <option value="1" {% ifequal partid 1 %} selected {% endifequal %}>第1段对话</option>
+            <option value="2" {% ifequal partid 2 %} selected {% endifequal %}>第2段对话</option>
+            <option value="3" {% ifequal partid 3 %} selected {% endifequal %}>第3段对话</option>
+        </select>
+    </div>
+
+
+</div>
+
+<div style="display:inline;margin-left: 70px"  class="je-form-item je-f14 radio ">
+    <input type="radio" name="lr" value="1" jename="radio" {% ifequal lr 1 %}checked{% endifequal %} jetext="靠左">
+    <input type="radio" name="lr" value="0" jename="radio" {% ifequal lr 0 %}checked{% endifequal %}  jetext="靠右">
+</div>
+
+<div style="display:inline" class="je-form-item je-f14 radio">
+    {% for figure in figurelist %}
+    <input type="radio" name="spokesperson" value="{{ figure.id }}" jename="radio" {% ifequal figure.id role %}checked{% endifequal %} jetext="{{ figure.name }}">
+    {% endfor %}
+</div>
+
+<div class="je-form-item">
+    <label class="je-label je-f14">英文</label>
+    <div class="je-inputbox">
+        <input required="required" autofocus style="width: 550px" type="text" name="content" autocomplete="off" placeholder="请输入英文" class="je-input">
+    </div>
+</div>
+
+<div class="je-form-item">
+    <label class="je-label je-f14">中文</label>
+    <div class="je-inputbox">
+        <input style="width: 550px" type="text" name="translate" autocomplete="off" placeholder="请输入中文" class="je-input">
+    </div>
+</div>
+
+<div style="margin-left: 10%">
+    <button type="submit"  class="login" style="cursor: pointer; color: white; background: green">提交 </button>
+    <button type="reset"  class="login" style="cursor: pointer; color: dimgrey;">取消 </button>
+</div>
+</form>
+
+
+</div>
+
+<script src="{% static 'jeui/js/modules/jeui.js' %}" charset="utf-8"></script>
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- JEUI 必备script 代码，放于body末尾-->
+<script type="text/javascript">
+
+
+
+jeui.use(["jquery","jeBox","jeCheck","jeSelect"],function () {
+
+    $(".checkbox").jeCheck();
+    $(".radio").jeCheck({jename:"radio"});
+    $(".switch").jeCheck({jename:"switch"});
+
+    $(".myselect").jeSelect({
+        sosList: false
+    });
+    var index = parent.jeBox.frameIndex(window.name);
+    $('#btnIframe').click(function(){
+         //获取窗口索引
+        //parent.jeBox.msg('您将标记 [ ' +val + ' ] 成功传送给了父窗口');
+        parent.jeBox.close(index);
+    });
+ })
+
+{% ifequal action 'add' %}
+    window.scroll(0,document.body.scrollHeight);
+{% endifequal%}
+
+$("#showChinese").click(function(){
+    var val=$(this).attr("value");
+    if (val=='on'){
+        $(this).val("off");
+        $(".Chinese").hide();
+    }else {
+        $(this).val("on");
+        $(".Chinese").show();
+    }
+});
+
+$("#edit").click(function(){
+    var ex = prompt("请输入密码:");
+    if(ex == "dose"){
+        $("#add").toggle();
+    }else{
+        alert("密码错误，请重新输入！");
+    }
+});
+
+</script>
